@@ -10,7 +10,6 @@
 #include "Tienda_Variado.h" // Para usar funciones varias
 #include "audio.h" // Para usar funciones de audio
 #include "Tienda_Inventario.h" // Para usar funciones de inventario
-#include "Tienda_Imagen.h" // Para mostrar imágenes
 
 #define PRODUCTOS_POR_PAGINA 30
 
@@ -44,7 +43,6 @@ void MenuInventarioCarrito(Producto *inventario, Producto **carrito) {
             if (i == inicio + seleccion) {
                 printf(ANSI_CYAN "-> %-4d %-30s %-8d $%.2f\n" ANSI_RESET,
                     productos[i]->ID, productos[i]->Nombre, productos[i]->stock, productos[i]->Precio);
-                    MostrarImagen(productos[i]->ID); // Muestra la imagen del producto
                 }
             else
                 printf("   %-4d %-30s %-8d $%.2f\n",
@@ -57,22 +55,25 @@ void MenuInventarioCarrito(Producto *inventario, Producto **carrito) {
             tecla = _getch();
             if (tecla == 72 && seleccion > 0) { // Flecha arriba
                 seleccion--;
-                CerrarImagen(); // Cierra la imagen anterior
+                reproducir_en_slot(8, 8, 0, 0.1f);
             } else if (tecla == 80 && seleccion < (fin - inicio - 1)) { // Flecha abajo
                 seleccion++;
-                CerrarImagen();
+                reproducir_en_slot(9, 9, 0, 0.1f);
             } else if (tecla == 75 && pagina > 0) { // Flecha izquierda
                 pagina--;
+                reproducir_en_slot(12, 12, 0, 0.3f);
                 int productosEnPagina = (pagina == totalPaginas - 1) ? (total % PRODUCTOS_POR_PAGINA) : PRODUCTOS_POR_PAGINA;
                 if (productosEnPagina == 0) productosEnPagina = PRODUCTOS_POR_PAGINA;
                 if (seleccion >= productosEnPagina) seleccion = productosEnPagina - 1;
             } else if (tecla == 77 && pagina < totalPaginas - 1) { // Flecha derecha
                 pagina++;
+                reproducir_en_slot(12, 12, 0, 0.3f);
                 int productosEnPagina = (pagina == totalPaginas - 1) ? (total % PRODUCTOS_POR_PAGINA) : PRODUCTOS_POR_PAGINA;
                 if (productosEnPagina == 0) productosEnPagina = PRODUCTOS_POR_PAGINA;
                 if (seleccion >= productosEnPagina) seleccion = productosEnPagina - 1;
             }
         } else if (tecla == 13) { // Enter
+            reproducir_en_slot(13, 13, 0, 0.3f);
             int idx = pagina * PRODUCTOS_POR_PAGINA + seleccion;
             if (idx < total) {
                 Producto *nuevo = (Producto*)malloc(sizeof(Producto));
@@ -80,9 +81,10 @@ void MenuInventarioCarrito(Producto *inventario, Producto **carrito) {
                 nuevo->right = *carrito;
                 *carrito = nuevo;
                 printf("Producto agregado al carrito!\n");
-                system("pause");
+                Sleep(200);
             }
         } else if (tecla == 27) { // ESC
+            reproducir_en_slot(14, 14, 0, 0.3f);
             break;
         }
     }
@@ -93,6 +95,8 @@ void guardarCarritoCSV(Producto *carrito, const char *rutaArchivo) {
     FILE *archivo = fopen(rutaArchivo, "a");
     if (!archivo) {
         printf("No se pudo guardar el carrito en %s\n", rutaArchivo);
+        reproducir_en_slot(11, 11, 0, 0.3f); // Reproduce un sonido de error
+        Sleep(2000);
         return;
     }
     Producto *aux = carrito;

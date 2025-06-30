@@ -17,6 +17,8 @@ void registrarCliente() {
     FILE *archivo = fopen("recursos/output/clientes.csv", "a"); // Abre el archivo con el nombre "clientes.csv" en modo append
     if (!archivo) { // Verifica si el archivo se abrio correctamente
         printf("No se pudo abrir el archivo de clientes.\n");
+        reproducir_en_slot(11, 11, 0, 0.3f); // Reproduce un sonido de error
+        Sleep(2000); // Espera 2 segundos antes de salir
         return;
     }
     Cliente nuevo;
@@ -42,13 +44,15 @@ void registrarCliente() {
     FILE *carrito = fopen(dir, "w"); // Crea un archivo de carrito para el usuario
     if (!carrito) { // Verifica si el archivo se abrio correctamente
         printf("No se pudo crear el carrito del usuario %s.\n", nuevo.usuario);
+        reproducir_en_slot(11, 11, 0, 0.3f); // Reproduce un sonido de error
+        Sleep(2000);
         return;
     }
     fprintf(carrito,"0\n");
     fclose(carrito);
 
     printf("Registro exitoso!\n");
-    system("pause");
+    Sleep(1500); // Espera 2 segundos antes de salir
 }
 
 int loginCliente(char* nombreCliente) {
@@ -63,6 +67,8 @@ int loginCliente(char* nombreCliente) {
     FILE *archivo = fopen("recursos/output/clientes.csv", "r");
     if (!archivo) {
         printf("No se pudo abrir el archivo de clientes.\n");
+        reproducir_en_slot(11, 11, 0, 0.3f); // Reproduce un sonido de error
+        Sleep(2000);
         return 0;
     }
     Cliente temp; // Variable temporal para almacenar los datos leidos
@@ -83,7 +89,8 @@ int loginCliente(char* nombreCliente) {
         return 1;
     } else {
         printf("Usuario o contrasenia incorrectos.\n"); // Si no se encontro el usuario y la contraseña
-        system("pause");
+        reproducir_en_slot(11, 11, 0, 0.3f);
+        Sleep(2000);
         return 0;
     }
 }
@@ -130,6 +137,7 @@ void menuCliente(Producto **raiz) {
                 reproducir_en_slot(7, 7, 0, 0.3f);
             }
         } else if (tecla == 13) { // Enter
+            reproducir_en_slot(13, 13, 0, 0.3f);
             switch (opcion) {
                 case 0:
                     registrarCliente();
@@ -153,6 +161,7 @@ void menuCliente(Producto **raiz) {
                         int opcion = 0;
                         int tecla;
                         while (1) {  //Menu clientes
+                            actualizar_audio();
                             limpiarPantalla();
                             // Dibuja el cuadro con color
                             printf(ANSI_GREEN "+--------------------------------------+\n" ANSI_RESET);
@@ -181,11 +190,12 @@ void menuCliente(Producto **raiz) {
                                     reproducir_en_slot(7, 7, 0, 0.3f);
                                 }
                             } else if (tecla == 13) { // Enter
+                                reproducir_en_slot(13, 13, 0, 0.3f);
                                 switch (opcion) {
                                 case 0: 
                                     MenuInventarioCarrito(*raiz, &Lista);
                                     guardarCarritoCSV(Lista, direccion); // Guarda el carrito en el archivo del cliente
-                                    system("pause"); // muestre el inventario, y agregar a la lista
+                                    Sleep(1500); // muestre el inventario, y agregar a la lista
                                     break;
                                 case 1:
 
@@ -230,9 +240,25 @@ void menuCliente(Producto **raiz) {
                                     reproducir_en_slot(7, 7, 0, 0.3f);
                                 }
                             } else if (tecla == 13) { // Enter
-                                  switch(opcion2){
-                                    case 0:
-                                    printf("coming soon\n");
+                                reproducir_en_slot(13, 13, 0, 0.3f);
+                                  switch(opcion2){ 
+                                    case 0: //Eliminar un producto del carrito
+
+                                    char Name[50];
+                                    if(!(Lista)){
+                                        printf("La lista esta vacia\n");
+                                        Sleep(500);
+                                        break;
+                                    }
+                                    printf("Ingrese el nombre del producto a eliminar\n");
+                                    fgets(Name, 50, stdin);
+                                    Name[strcspn(Name, "\n")] = 0;
+                                    //limpiarBuffer();
+
+                                    DeleteNode(&Lista, Name);
+                                    guardarCarritoCSV(Lista, direccion);
+                                    Sleep(700);
+
                                         break;
                                     case 1:
                                         if(Lista == NULL){   //Si el carrito no esta vacio, abre el archivo y cambia la variable numerica
@@ -252,6 +278,7 @@ void menuCliente(Producto **raiz) {
                                                     FILE *carrito = fopen(direccion, "r+");
                                                     if(carrito == NULL){
                                                         printf("No se pudo abrir el archivo\n");
+                                                        reproducir_en_slot(11, 11, 0, 0.3f); // Reproduce un sonido de error
                                                         Sleep(500);
                                                         break;
                                                     }
@@ -266,6 +293,7 @@ void menuCliente(Producto **raiz) {
                                                     break;         
                                             }
                                         } while(subtout);
+                                        reproducir_en_slot(14, 14, 0, 0.3f);
                                         break;
                                     case 2:
                                         out = 0;
@@ -275,6 +303,9 @@ void menuCliente(Producto **raiz) {
                         }
                                 break;
                                 case 2:
+                                //jhgjhg
+                                    reproducir_en_slot(14, 14, 0, 0.3f);
+                                    fade_out_pause_slot(1, 600); // Desvanece la música del cliente
                                     return;   
                                 }
                             } 
@@ -282,6 +313,7 @@ void menuCliente(Producto **raiz) {
                     } 
                     break;
                 case 2:
+                    reproducir_en_slot(14, 14, 0, 0.3f);
                     fade_out_pause_slot(1, 600); // Desvanece la música de fondo
                     return;
                 }

@@ -20,11 +20,15 @@ int verificarAdmin() {
 
     if (!archivo) {
         printf("No se pudo abrir el archivo de llave.\n");
+		reproducir_en_slot(11, 11, 0, 0.3f); // Reproduce un sonido de error
+        Sleep(2000);
         return 0;
     }
 
     if (!fgets(llaveArchivo, sizeof(llaveArchivo), archivo)) {
         printf("Error al leer la llave del archivo.\n");
+		reproducir_en_slot(11, 11, 0, 0.3f); // Reproduce un sonido de error
+        Sleep(2000);
         fclose(archivo);
         return 0;
     }
@@ -41,6 +45,8 @@ int verificarAdmin() {
         return 1;
     } else {
         printf("No se encontraron permisos de administrador.\n");
+		reproducir_en_slot(11, 11, 0, 0.3f); // Reproduce un sonido de error
+        Sleep(2000);
         return 0;
     }
 }
@@ -109,6 +115,8 @@ void menuAdmin(Producto **raiz) {
 							fclose(archivo);
 						} else {
 							printf("Error al guardar el inventario.\n");
+							reproducir_en_slot(11, 11, 0, 0.3f); // Reproduce un sonido de error
+        					Sleep(2000);
 							getchar();
 						}
 						printf("Producto agregado, Inventario actualizado.\n");
@@ -126,6 +134,7 @@ void menuAdmin(Producto **raiz) {
 							printf("Producto eliminado.\n");
 						} else {
 							printf("Producto no encontrado.\n");
+							Sleep(500);
 						}
 						GuardarInventarioEnArchivo(*raiz, "recursos/output/Inventario.csv");
 						system("pause");

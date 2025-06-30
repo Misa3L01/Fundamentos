@@ -13,7 +13,7 @@ FMOD_SYSTEM *audio_system;
 
 // Canciones y efectos 
 const char *canciones[] = {
-    "recursos/audio/MenuV2.wav", // 0: Música de fondo del menú
+    "recursos/audio/MusicaMenu.mp3", // 0: Música de fondo del menú
     "recursos/audio/MusicaCliente.mp3", // 1: Música de fondo del cliente
     "recursos/audio/MusicaCajero.mp3", // 2: Música de fondo del cajero
     "recursos/audio/AdministradorMusica.mp3", // 3: Música de fondo del administrador
@@ -25,7 +25,9 @@ const char *canciones[] = {
     "recursos/audio/EffectUp.wav", // 9: Efecto de sonido al navegar hacia arriba
     "recursos/audio/ScannerSonido.mp3", // 10: Efecto de sonido del escáner
     "recursos/audio/ErrorSonido.mp3", // 11: Efecto de sonido de error
-    "recursos/audio/PasoPagina.wav" // 12: Efecto de sonido al pasar página
+    "recursos/audio/PasoPagina.wav", // 12: Efecto de sonido al pasar página
+    "recursos/audio/Enter.wav", // 13: Efecto de sonido al confirmar una acción
+    "recursos/audio/Escape.wav" // 14: Efecto de sonido al salir
 };
 
 // Arrays de punteros para sonidos y canales

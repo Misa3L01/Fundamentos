@@ -8,6 +8,7 @@
 
 #include "Tienda_Estructuras.h"
 #include "Tienda_Variado.h" // Para usar funciones varias
+#include "audio.h" // Para usar funciones de audio
 
 Producto *Insertar(Producto **raiz, int ID, char Nombre[], char Categoria[], char Subcategoria[], int stock, float Precio){
 	if(!(*raiz)){
@@ -31,6 +32,7 @@ Producto *Insertar(Producto **raiz, int ID, char Nombre[], char Categoria[], cha
 		Insertar(&(*raiz)->left, ID, Nombre, Categoria, Subcategoria, stock, Precio);	
 		else{
 		printf("El ID %d ya existe en el inventario.\n", ID);
+		Sleep(500);
 		return NULL;
 		}
 	return *raiz;
@@ -42,6 +44,8 @@ void Precarga(Producto **raiz){
 	FILE* archivo = fopen("recursos/output/Inventario.csv", "r");
 	if (archivo == NULL) {
 		perror("No se pudo abrir el archivo");
+		reproducir_en_slot(11, 11, 0, 0.3f); // Reproduce un sonido de error
+        Sleep(2000);
 		return;
 	}
 		
@@ -487,6 +491,33 @@ void CargarCarritoALista(Producto ** Lista, char direccion[]){
 
 	}	
 	fclose(archivo);
+}
+
+void DeleteNode(Producto **Lista, char Name[]){
+	if(!(*Lista)){
+		printf("La lista esta vacia\n");
+		return;
+	}
+	Producto *mark = *Lista;
+	Producto *pre = NULL;
+	while(mark != NULL && strcmp(mark->Nombre, Name) != 0){
+		pre = mark;
+		mark = mark->right;
+	}
+	if(mark == NULL){
+		printf("No se ha encontrado el producto\n");
+		return;
+	}
+	if(mark == *Lista){
+		*Lista = (*Lista)->right;
+		free(mark);
+		printf("Se ha borrado el producto del carrito\n");
+		return;
+	}
+	pre->right = mark->right;
+	free(mark);
+	printf("Se ha borrado el producto del carrito\n");
+	return;
 }
 
 #endif

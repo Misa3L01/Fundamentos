@@ -1,6 +1,6 @@
-# Proyecto de Fundamentos de Computación
+# Proyecto Final - Fundamentos de Computación
 
-**Repositorio:** `Fundamentos`  
+**Repositorio:** `Proyecto Final`  
 **Descripción:** Sistema de Gestión de Tienda
 
 Este proyecto fue pensado para poner a prueba y en práctica los conocimientos adquiridos a lo largo de la cursada de la materia **Fundamentos de Computación**. La implementación incluye el uso de funciones con punteros, listas, árboles y hashes, entre otras estructuras y conceptos vistos durante el curso.

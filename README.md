@@ -30,6 +30,8 @@ Todo esto se realiza de forma sencilla a través de una interfaz medianamente am
 - Para compilar correctamente el proyecto y generar el archivo `.exe`, presiona **Ctrl + Shift + B**.
 - Esto ejecutará la tarea de compilación configurada en VS Code y podrás probar el ejecutable resultante en la misma carpeta del proyecto.
 
+- Si deseas probar el proyecto en Zinjai, puedes descagar solamente su carpeta correspondiente, abre directamente el archivo proyecto.c desde la carpeta correspondiente.
+
 ## Dependencias
 
 - Este código fue desarrollado, trabajado y probado únicamente en **GCC** usando **MinGW** para su ejecución en sistemas Windows.

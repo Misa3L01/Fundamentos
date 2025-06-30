@@ -8,7 +8,6 @@
                 "${workspaceFolder}/recursos/output",
                 "${workspaceFolder}/recursos/audio",
                 "${workspaceFolder}/recursos/frames",
-                "${workspaceFolder}/recursos/imagenes",
                 "${workspaceFolder}/bibliotecas/fmod/include",
                 "${workspaceFolder}/bibliotecas/fmod/lib/",
                 "${workspaceFolder}/bibliotecas/fmod/bin"

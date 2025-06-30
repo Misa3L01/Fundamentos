@@ -9,7 +9,6 @@
 #include "librerias/Tienda_Variado.h"
 #include "librerias/Tienda_Inventario.h"
 #include "librerias/Tienda_Cajero.h"
-#include "librerias/Tienda_Imagen.h"
 #include "librerias/audio.h"
 	
 int main() {
@@ -26,8 +25,6 @@ int main() {
 	precargar_sonidos();
 
 	fade_in_slot_existente(6, 0.3, 600); // Reproduce la música de fondo
-
-	getchar(); // Espera a que el usuario presione una tecla antes de iniciar la animación
 
 	// Reproduce la animación de inicio
 	cargar_frames(); 
@@ -80,6 +77,7 @@ int main() {
 			reproducir_en_slot(7, 7, 0, 0.3f); // Reproduce un sonido al navegar
 		}
 	} else if (tecla == 13) { // Enter
+		reproducir_en_slot(13, 13, 0, 0.3f);
 		switch(seleccion) {
 		case 0: 
 			fade_out_pause_slot(0, 600); // Desvanece la música de fondo
@@ -97,9 +95,10 @@ int main() {
 			fade_in_slot_existente(0, 1.0, 600); // Reproduce la música del menú en loop, con fade in gradual
 			break;
 		case 3: 
+			reproducir_en_slot(14, 14, 0, 0.3f); // Reproduce un sonido al salir
 			printf(ANSI_BLUE "Saliendo...\n" ANSI_RESET);
 			fade_out_slot(0, 600); // Desvanece la música de fondo
-			CerrarImagen(); // Cerrar cualquier imagen abierta
+			LiberarInventario(raiz); // Libera la memoria del inventario
 			// Libera los recursos de audio
 			close_audio();
 			return 0;

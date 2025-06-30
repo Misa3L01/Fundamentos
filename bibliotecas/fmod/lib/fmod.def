@@ -1,0 +1,40 @@
+LIBRARY fmod.dll
+EXPORTS
+    FMOD_System_Create
+    FMOD_System_Release
+    FMOD_System_GetVersion
+    FMOD_System_Init
+    FMOD_System_Close
+    FMOD_System_Update
+    FMOD_System_CreateSound
+    FMOD_System_CreateStream
+    FMOD_System_PlaySound
+    FMOD_System_GetChannel
+    FMOD_System_Set3DListenerAttributes
+    FMOD_System_Set3DSettings
+    FMOD_System_GetMasterChannelGroup
+
+    FMOD_Sound_Release
+    FMOD_Sound_SetMode
+    FMOD_Sound_GetLength
+    FMOD_Sound_SetLoopCount
+    FMOD_Sound_SetLoopPoints
+    FMOD_Sound_Set3DMinMaxDistance
+    FMOD_Sound_Set3DAttributes
+
+    FMOD_Channel_SetPaused
+    FMOD_Channel_GetPaused
+    FMOD_Channel_SetVolume
+    FMOD_Channel_Stop
+    FMOD_Channel_IsPlaying
+    FMOD_Channel_GetPosition
+    FMOD_Channel_SetPosition
+    FMOD_Channel_SetLoopCount
+    FMOD_Channel_SetLoopPoints
+    FMOD_Channel_Set3DAttributes
+    FMOD_Channel_Set3DMinMaxDistance
+    FMOD_Channel_SetPan
+    FMOD_Channel_SetPitch
+    FMOD_Channel_GetVolume
+    FMOD_Channel_GetFrequency
+    FMOD_Channel_SetFrequency

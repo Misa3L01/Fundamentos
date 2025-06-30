@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "windows-gcc-x64",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/librerias",
+                "${workspaceFolder}/recursos/output",
+                "${workspaceFolder}/recursos/audio",
+                "${workspaceFolder}/recursos/frames",
+                "${workspaceFolder}/recursos/imagenes",
+                "${workspaceFolder}/bibliotecas/fmod/include",
+                "${workspaceFolder}/bibliotecas/fmod/lib/",
+                "${workspaceFolder}/bibliotecas/fmod/bin"
+            ],
+            "compilerPath": "C:/mingw64/bin/gcc.exe",
+            "cStandard": "${default}",
+            "cppStandard": "${default}",
+            "intelliSenseMode": "windows-gcc-x64",
+            "compilerArgs": [
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}

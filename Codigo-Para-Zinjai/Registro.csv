@@ -1,0 +1,70 @@
+Fecha: 2025-06-30 03:04
+ID,Nombre,Categoria,Subcategoria,Precio
+1001,"Smart TV 50""",Electronica,Televisores,350000.00
+1002,"Smart TV 32""",Electronica,Televisores,189999.00
+1003,"TV LED 24""",Electronica,Televisores,124999.50
+Total 664998.50
+
+Fecha: 2025-06-30 03:16
+ID,Nombre,Categoria,Subcategoria,Precio
+1011,Teclado Mecanico HyperX,Perifericos,Teclados,28999.00
+1010,Teclado Logitech K120,Perifericos,Teclados,10499.90
+1002,"Smart TV 32""",Electronica,Televisores,189999.00
+1002,"Smart TV 32""",Electronica,Televisores,189999.00
+1010,Teclado Logitech K120,Perifericos,Teclados,10499.90
+1011,Teclado Mecanico HyperX,Perifericos,Teclados,28999.00
+Total 458995.81
+
+Fecha: 2025-06-30 03:22
+ID,Nombre,Categoria,Subcategoria,Precio
+1001,"Smart TV 50""",Electronica,Televisores,350000.00
+1002,"Smart TV 32""",Electronica,Televisores,189999.00
+1003,"TV LED 24""",Electronica,Televisores,124999.50
+Total 664998.50
+
+Fecha: 2025-06-30 03:22
+ID,Nombre,Categoria,Subcategoria,Precio
+1003,"TV LED 24""",Electronica,Televisores,124999.50
+1002,"Smart TV 32""",Electronica,Televisores,189999.00
+Total 314998.50
+
+Fecha: 2025-06-30 13:57
+ID,Nombre,Categoria,Subcategoria,Precio
+1001,"Smart TV 50""",Electronica,Televisores,350000.00
+1002,"Smart TV 32""",Electronica,Televisores,189999.00
+Total 539999.00
+
+Fecha: 2025-06-30 13:57
+ID,Nombre,Categoria,Subcategoria,Precio
+1001,"Smart TV 50""",Electronica,Televisores,350000.00
+Total 350000.00
+
+Fecha: 2025-06-30 13:58
+ID,Nombre,Categoria,Subcategoria,Precio
+1001,"Smart TV 50""",Electronica,Televisores,350000.00
+1001,"Smart TV 50""",Electronica,Televisores,350000.00
+Total 700000.00
+
+Fecha: 2025-06-30 14:05
+ID,Nombre,Categoria,Subcategoria,Precio
+1001,"Smart TV 50""",Electronica,Televisores,350000.00
+Total 350000.00
+
+Fecha: 2025-06-30 14:11
+ID,Nombre,Categoria,Subcategoria,Precio
+1001,"Smart TV 50""",Electronica,Televisores,350000.00
+1001,"Smart TV 50""",Electronica,Televisores,350000.00
+1001,"Smart TV 50""",Electronica,Televisores,350000.00
+1003,"TV LED 24""",Electronica,Televisores,124999.50
+1001,"Smart TV 50""",Electronica,Televisores,350000.00
+1001,"Smart TV 50""",Electronica,Televisores,350000.00
+1001,"Smart TV 50""",Electronica,Televisores,350000.00
+Total 2224999.50
+
+Fecha: 2025-06-30 18:43
+ID,Nombre,Categoria,Subcategoria,Precio
+1001,"Smart TV 50""",Electronica,Televisores,350000.00
+1001,"Smart TV 50""",Electronica,Televisores,350000.00
+1002,"Smart TV 32""",Electronica,Televisores,189999.00
+Total 889999.00
+

@@ -72,7 +72,7 @@ void liberar_frames() {
 // Reproducir animación durante 5 segundos
 void reproducir_animacion_ascii() {
     int tiempo_por_frame = 41; // ms
-    int duracion_total = 10000; // ms
+    int duracion_total = 1000; // ms
     int ciclos = duracion_total / tiempo_por_frame;
 
     for (int c = 0; c < ciclos; c++) {

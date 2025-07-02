@@ -92,6 +92,7 @@ int loginCliente(char* nombreCliente) {
 void menuCliente(Producto **raiz) {
    Producto *Lista = NULL;
    char nombreCliente[50] = "";
+   int a;
    
    const char* opciones2[] = {
 	   "Editar carrito",
@@ -198,6 +199,10 @@ void menuCliente(Producto **raiz) {
                                 switch (opcion) {
                                 case 0: 
                                     MenuInventarioCarrito(*raiz, &Lista);
+									FILE *carro = fopen(direccion, "w");
+									if(carro == NULL) return;
+									fprintf(carro, "0\n");
+									fclose(carro);
                                     guardarCarritoCSV(Lista, direccion); // Guarda el carrito en el archivo del cliente
                                     system("pause"); // muestre el inventario, y agregar a la lista
                                     break;
@@ -248,13 +253,30 @@ void menuCliente(Producto **raiz) {
 											Sleep(500);
 											break;
 										}
-										printf("Ingrese el nombre del producto a eliminar\n");
+										/*printf("Ingrese el nombre del producto a eliminar\n");
 										fgets(Name, 50, stdin);
 										Name[strcspn(Name, "\n")] = 0;
 										//limpiarBuffer();
 										
-										DeleteNode(&Lista, Name);
+										DeleteNode(&Lista, Name);*/
+										
+										printf("Seleccione el producto a eliminar\n");
+										a = -1;
+										scanf("%d", &a);
+										limpiarBuffer();
+										
+										if(!DeleteNode(&Lista, Name, a)){
+											Sleep(500);
+											break;
+										}
+										
+										FILE *carro = fopen(direccion, "w");
+										if(carro == NULL) return;
+										fprintf(carro, "0\n");
+										fclose(carro);
+										
 										guardarCarritoCSV(Lista, direccion);
+										printf("Carrito guardado\n");
 										Sleep(700);
 										
                                         break;

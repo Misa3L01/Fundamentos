@@ -61,15 +61,17 @@ int tecla = getch();
 				reproducir_en_slot(7, 7, 0, 0.3f);
 			}
 		} else if (tecla == 13) { // Enter
+			reproducir_en_slot(13 ,13 , 0, 0.3f);
 			switch(seleccion) {    //Caso 0: Cargar el carrito de un cliente
 			case 0:
 				Producto *Cart = NULL;
 				Producto *actual;
-				limpiarPantalla();
+				//limpiarPantalla();
 				
 				FILE *Clientes = fopen("recursos/output/clientes.csv", "r");    //Lee el archivo de clientes y, si sus carritos estan confirmados, guarda sus nombres en una lista
 				if(Clientes == NULL){
-					printf("No hay clientes registrados\n");
+					printf(ANSI_RED"No hay clientes registrados\n"ANSI_RESET);
+					Sleep(700);
 					break;
 				}
 
@@ -103,9 +105,11 @@ int tecla = getch();
 				}
 
 				if(List == NULL){
-					printf("No hay carritos disponibles\n");
+					printf(ANSI_RED"No hay carritos disponibles\n"ANSI_RESET);
+					Sleep(700);
 					break;
 				}
+				limpiarPantalla();
 				int cnt = 0;
 				printf(ANSI_GREEN"----------- Clientes en espera -----------\n" ANSI_RESET);  //Imprime carritos disponibles
 				Customer *mark = List;
@@ -123,11 +127,15 @@ int tecla = getch();
 					scanf("%d", &select);
 					limpiarBuffer();
 					
-					if(select == 0)
-						break;
 					if(select > cnt || select < 0)
-						printf("Opcion invalida\n");
+						printf(ANSI_YELLOW"Opcion invalida\n"ANSI_RESET);
 					}while(select > cnt || select < 0);
+
+					if(select == 0){
+						printf("Regresando...\n");
+						Sleep(500);
+						break;	
+					}
 
 						limpiarPantalla();
 						mark = List;
@@ -139,7 +147,7 @@ int tecla = getch();
 						char fmt[10] = ".csv";
 						strcat(dir, fmt);
 
-						printf("Cliente: %s\n", mark->Nombre);  //Lee el carrito del cliente seleccionado, y lo guarda en una lista
+						printf(ANSI_BLUE"Cliente: %s\n"ANSI_RESET, mark->Nombre);  //Lee el carrito del cliente seleccionado, y lo guarda en una lista
 						CargarCarritoALista(&Cart, dir);
 						
 						actual = Cart;
@@ -152,7 +160,7 @@ int tecla = getch();
 						}
 						int verify = 1;
 						do{
-							printf("\nTotal: %.2f\n", suma);
+							printf(ANSI_BLUE"\nTotal: %.2f\n"ANSI_RESET, suma);
 							printf("\nDesea proceder con la compra? (S o N): ");   //Pregunta para confirmar la compra
 							char put;
 							act = getchar();
@@ -195,7 +203,7 @@ int tecla = getch();
 				printf(ANSI_BLUE"-1 " ANSI_RESET);
 				printf("Para cancelar la ultima operacion\n");
 	do{
-		if(total)
+		if(total > 0)
 			printf(ANSI_CYAN "\nTotal: %.2f\n" ANSI_RESET, total); 
 		ID = -9999;
 		printf(ANSI_CYAN "ID: " ANSI_RESET);
@@ -230,14 +238,22 @@ int tecla = getch();
 					reproducir_en_slot(5, 5, 0, 0.5f);
 					break;
 				default:
-					printf("Opcion invalida\n");
+					printf(ANSI_RED"Opcion invalida\n"ANSI_RESET);
 					reproducir_en_slot(11, 11, 0, 0.3f); // Reproduce un sonido de error
 					Sleep(500);
 					salir = 1;
 				}
 				}while(salir); 
-				printf("Operacion completa\n");
+				printf(ANSI_GREEN"Operacion completa\n"ANSI_RESET);
+				Sleep(700);
 				limpiarPantalla();
+
+				printf("\nIngrese la ID del producto, ingrese ");
+				printf(ANSI_BLUE"0 " ANSI_RESET);
+				printf("Para completar la carga\nIngrese ");
+				printf(ANSI_BLUE"-1 " ANSI_RESET);
+				printf("Para cancelar la ultima operacion\n");
+				
 				RegistrarVenta(&Lista, total);  //Se guardan los productos comprados en registro.csv
 				total = 0;
 			}
@@ -249,6 +265,7 @@ int tecla = getch();
 		else{
 			if(ID == -1){  //Se elimina el ultimo producto
 				EliminarNodo(&Lista, &total);
+				Sleep(500);
 			}
 			else{
 			if(!BuscarID(raiz, ID, &temp)){  //Se busca la ID del producto en arbol

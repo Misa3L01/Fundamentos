@@ -202,10 +202,20 @@ void agregarProducto(Producto **raiz) {
     float Precio;
     char Nombre[N], Categoria[N], Subcategoria[N];
 
-    printf("Ingrese el ID del producto: ");
+    //printf("Ingrese el ID del producto (0 para cancelar): ");
+	printf("Ingrese el ID del producto (");
+	printf(ANSI_BLUE"0"ANSI_RESET") para cancelar: ");
+
     scanf("%d", &ID);
+	//limpiarBuffer();
+
+	if(ID == 0){
+		printf("Regresando...\n");
+		Sleep(500);
+		return;
+	}
     while (BuscarProducto(*raiz, ID) != NULL || ID <= 0) {
-        printf("El ID ya existe o es invalido. Ingrese un ID diferente: ");
+        printf(ANSI_YELLOW"El ID ya existe o es invalido. Ingrese un ID diferente: "ANSI_RESET);
         getchar();
         scanf("%d", &ID);
     }
@@ -408,9 +418,11 @@ void Copiar(Producto *raiz, Producto *raizDir){
 }
 
 void MostrarLista(Producto *Lista){
+	int a = 1;
 	while(Lista != NULL){
-		printf("Nombre: %s, Categoria: %s, Precio: %.2f\n", Lista->Nombre, Lista->Categoria, Lista->Precio);
+		printf("[%d] Nombre: %s, Categoria: %s, Precio: %.2f\n",a, Lista->Nombre, Lista->Categoria, Lista->Precio);
 		Lista = Lista->right;
+		a++;
 	}
 }
 
@@ -433,10 +445,12 @@ void EliminarNodo(Producto **Lista, float *total){
 	if(mark == *Lista){
 		free(*Lista);
 		*Lista = NULL;
+		printf(ANSI_GREEN"Producto eliminado\n"ANSI_RESET);
 		return;
 	}
 	free(mark);
 	pre->right = NULL;
+	printf(ANSI_GREEN"Producto eliminado\n"ANSI_RESET);
 	return;
 }
 
@@ -493,31 +507,33 @@ void CargarCarritoALista(Producto ** Lista, char direccion[]){
 	fclose(archivo);
 }
 
-void DeleteNode(Producto **Lista, char Name[]){
+int DeleteNode(Producto **Lista, char Name[], int a){
+	int search = 1;
 	if(!(*Lista)){
-		printf("La lista esta vacia\n");
-		return;
+		printf(ANSI_YELLOW"La lista esta vacia\n"ANSI_RESET);
+		return 0;
 	}
 	Producto *mark = *Lista;
 	Producto *pre = NULL;
-	while(mark != NULL && strcmp(mark->Nombre, Name) != 0){
+	while(mark != NULL && search != a){
 		pre = mark;
 		mark = mark->right;
+		search++;
 	}
 	if(mark == NULL){
-		printf("No se ha encontrado el producto\n");
-		return;
+		printf(ANSI_YELLOW"No se ha encontrado el producto\n"ANSI_RESET);
+		return 0;
 	}
 	if(mark == *Lista){
 		*Lista = (*Lista)->right;
 		free(mark);
-		printf("Se ha borrado el producto del carrito\n");
-		return;
+		printf(ANSI_GREEN"Se ha borrado el producto del carrito\n"ANSI_RESET);
+		return 1;
 	}
 	pre->right = mark->right;
 	free(mark);
-	printf("Se ha borrado el producto del carrito\n");
-	return;
+	printf(ANSI_GREEN"Se ha borrado el producto del carrito\n"ANSI_RESET);
+	return 1;
 }
 
 #endif

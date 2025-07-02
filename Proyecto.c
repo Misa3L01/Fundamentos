@@ -96,7 +96,7 @@ int main() {
 			break;
 		case 3: 
 			reproducir_en_slot(14, 14, 0, 0.3f); // Reproduce un sonido al salir
-			printf(ANSI_BLUE "Saliendo...\n" ANSI_RESET);
+			printf(ANSI_GREEN "Saliendo...\n" ANSI_RESET);
 			fade_out_slot(0, 600); // Desvanece la música de fondo
 			LiberarInventario(raiz); // Libera la memoria del inventario
 			// Libera los recursos de audio

@@ -71,6 +71,7 @@ int tecla = getch();
 				FILE *Clientes = fopen("clientes.csv", "r");    //Lee el archivo de clientes y, si sus carritos estan confirmados, guarda sus nombres en una lista
 				if(Clientes == NULL){
 					printf("No hay clientes registrados\n");
+					Sleep(500);
 					break;
 				}
 
@@ -118,16 +119,20 @@ int tecla = getch();
 				}
 				int select;
 				do{
-					select = -1;
-					printf("Ingrese el numero del cliente: (Ingrese 0 para cancelar)");
+					select = -9999;
+					printf("Ingrese el numero del cliente: (Ingrese 0 para cancelar): ");
 					scanf("%d", &select);
 					limpiarBuffer();
 					
-					if(select == 0)
-						break;
 					if(select > cnt || select < 0)
 						printf("Opcion invalida\n");
 					}while(select > cnt || select < 0);
+				
+					if(select == 0){
+						printf("Regresando...\n");
+						Sleep(500);
+						break;
+					}
 
 						limpiarPantalla();
 						mark = List;
@@ -187,10 +192,10 @@ int tecla = getch();
 
 				break;
 			case 1: 
-				limpiarPantalla();
-				printf("\nIngrese la ID del producto, ingrese 0 para completar la carga\nIngrese -1 para cancelar ultima operacion\n");
+			limpiarPantalla();
+			printf("\nIngrese la ID del producto, ingrese 0 para completar la carga\nIngrese -1 para cancelar ultima operacion\n");	
 	do{
-		if(total)
+		if(total > 0)
 			printf("\nTotal: %.2f\n", total); 
 		ID = -9999;
 		printf("ID: ");
@@ -233,6 +238,7 @@ int tecla = getch();
 				printf("Operacion completa\n");
 				Sleep(500);
 				limpiarPantalla();
+				printf("\nIngrese la ID del producto, ingrese 0 para completar la carga\nIngrese -1 para cancelar ultima operacion\n");					
 				RegistrarVenta(&Lista, total);  //Se guardan los productos comprados en registro.csv
 				total = 0;
 			}
@@ -244,7 +250,6 @@ int tecla = getch();
 		else{
 			if(ID == -1){  //Se elimina el ultimo producto
 				EliminarNodo(&Lista, &total);
-				printf("Producto eliminado");
 				Sleep(500);
 			}
 			else{

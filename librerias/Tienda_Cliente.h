@@ -51,7 +51,7 @@ void registrarCliente() {
     fprintf(carrito,"0\n");
     fclose(carrito);
 
-    printf("Registro exitoso!\n");
+    printf(ANSI_GREEN"Registro exitoso!\n"ANSI_RESET);
     Sleep(1500); // Espera 2 segundos antes de salir
 }
 
@@ -84,11 +84,11 @@ int loginCliente(char* nombreCliente) {
     }
     fclose(archivo);
     if (encontrado) { // Si se encontro el usuario y la contraseña
-        printf("!Bienvenido, %s!\n", nombreCliente); // Muestra el nombre del cliente
+        printf(ANSI_GREEN"!Bienvenido, %s!\n"ANSI_RESET, nombreCliente); // Muestra el nombre del cliente
         system("pause");
         return 1;
     } else {
-        printf("Usuario o contrasenia incorrectos.\n"); // Si no se encontro el usuario y la contraseña
+        printf(ANSI_RED"Usuario o contrasenia incorrectos.\n"ANSI_RESET); // Si no se encontro el usuario y la contraseña
         reproducir_en_slot(11, 11, 0, 0.3f);
         Sleep(2000);
         return 0;
@@ -108,6 +108,7 @@ void menuCliente(Producto **raiz) {
     const int numOpciones = sizeof(opciones) / sizeof(opciones[0]);
     int opcion = 0;
     int tecla;
+    int a;
     while (1) {
 				limpiarPantalla();
 				// Dibuja el cuadro con color
@@ -194,6 +195,10 @@ void menuCliente(Producto **raiz) {
                                 switch (opcion) {
                                 case 0: 
                                     MenuInventarioCarrito(*raiz, &Lista);
+                                    FILE *carro = fopen(direccion, "w");
+									if(carro == NULL) return;
+									fprintf(carro, "0\n");
+									fclose(carro);
                                     guardarCarritoCSV(Lista, direccion); // Guarda el carrito en el archivo del cliente
                                     Sleep(1500); // muestre el inventario, y agregar a la lista
                                     break;
@@ -246,24 +251,41 @@ void menuCliente(Producto **raiz) {
 
                                     char Name[50];
                                     if(!(Lista)){
-                                        printf("La lista esta vacia\n");
-                                        Sleep(500);
+                                        printf(ANSI_RED"El carrito esta vacio\n"ANSI_RESET);
+                                        Sleep(700);
                                         break;
                                     }
-                                    printf("Ingrese el nombre del producto a eliminar\n");
+                                   /* printf("Ingrese el nombre del producto a eliminar\n");
                                     fgets(Name, 50, stdin);
                                     Name[strcspn(Name, "\n")] = 0;
                                     //limpiarBuffer();
 
-                                    DeleteNode(&Lista, Name);
+                                    DeleteNode(&Lista, Name);*/
+
+                                    printf("Seleccione el producto a eliminar: ");
+									a = -1;
+									scanf("%d", &a);
+									limpiarBuffer();
+
+                                    if(!DeleteNode(&Lista, Name, a)){
+										Sleep(500);
+										break;
+									}
+										
+									FILE *carro = fopen(direccion, "w");
+									if(carro == NULL) return;
+									fprintf(carro, "0\n");
+									fclose(carro);
+
                                     guardarCarritoCSV(Lista, direccion);
-                                    Sleep(700);
+                                    printf(ANSI_GREEN"Carrito guardado\n"ANSI_RESET);
+                                    Sleep(1000);
 
                                         break;
                                     case 1:
                                         if(Lista == NULL){   //Si el carrito no esta vacio, abre el archivo y cambia la variable numerica
-                                            printf("El carrito esta vacio\n");
-                                            Sleep(500);
+                                            printf(ANSI_RED"El carrito esta vacio\n"ANSI_RESET);
+                                            Sleep(700);
                                             break;
                                         }
 
@@ -284,8 +306,8 @@ void menuCliente(Producto **raiz) {
                                                     }
                                                     fprintf(carrito, "1");
                                                     fclose(carrito);
-                                                    printf("Se confirmo la compra\n");
-                                                    Sleep(500);
+                                                    printf(ANSI_GREEN"Se confirmo la compra\n"ANSI_RESET);
+                                                    Sleep(700);
                                                     subtout = 0;
                                                     break;
                                                 case 'N': case 'n':

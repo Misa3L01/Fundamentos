@@ -19,14 +19,14 @@ int verificarAdmin() {
     FILE *archivo = fopen("recursos/output/llave.txt", "r");
 
     if (!archivo) {
-        printf("No se pudo abrir el archivo de llave.\n");
+        printf(ANSI_RED"No se pudo abrir el archivo de llave.\n"ANSI_RESET);
 		reproducir_en_slot(11, 11, 0, 0.3f); // Reproduce un sonido de error
         Sleep(2000);
         return 0;
     }
 
     if (!fgets(llaveArchivo, sizeof(llaveArchivo), archivo)) {
-        printf("Error al leer la llave del archivo.\n");
+        printf(ANSI_RED"Error al leer la llave del archivo.\n"ANSI_RESET);
 		reproducir_en_slot(11, 11, 0, 0.3f); // Reproduce un sonido de error
         Sleep(2000);
         fclose(archivo);
@@ -41,10 +41,11 @@ int verificarAdmin() {
     }
 
     if (strcmp(llaveArchivo, LLAVE_MAESTRA) == 0) {
-        printf("Acceso concedido.\n");
+        printf(ANSI_GREEN"Acceso concedido.\n"ANSI_RESET);
+		Sleep(500);
         return 1;
     } else {
-        printf("No se encontraron permisos de administrador.\n");
+        printf(ANSI_YELLOW"No se encontraron permisos de administrador.\n"ANSI_RESET);
 		reproducir_en_slot(11, 11, 0, 0.3f); // Reproduce un sonido de error
         Sleep(2000);
         return 0;
@@ -52,7 +53,6 @@ int verificarAdmin() {
 }
 
 void menuAdmin(Producto **raiz) {
-	//CargarInventarioDesdeArchivo(raiz, "recursos/output/Inventario.csv");
 	fade_in_slot_existente(3, 0.1, 600); // Reproduce la música de fondo del administrador
 
 	if (verificarAdmin()) {
@@ -114,26 +114,35 @@ void menuAdmin(Producto **raiz) {
 							GuardarInventarioEnArchivo(*raiz, "recursos/output/Inventario.csv");
 							fclose(archivo);
 						} else {
-							printf("Error al guardar el inventario.\n");
+							printf(ANSI_RED"Error al guardar el inventario.\n"ANSI_RESET);
 							reproducir_en_slot(11, 11, 0, 0.3f); // Reproduce un sonido de error
         					Sleep(2000);
 							getchar();
 						}
-						printf("Producto agregado, Inventario actualizado.\n");
-						limpiarPantalla();
+						printf(ANSI_GREEN"Producto agregado, Inventario actualizado.\n"ANSI_RESET);
+						//limpiarPantalla();
 						system("pause");
 						break;
 					case 2:
-						printf("Coloque la ID a eliminar: ");
+						//printf("Coloque la ID a eliminar (0 para cancelar): ");
+						printf("Ingrese el ID a eliminar (");
+						printf(ANSI_BLUE"0"ANSI_RESET") para cancelar: ");
+
 						int ID;
 						Producto* temp;
 						scanf("%d", &ID);
 						getchar();
-						//search(raiz, ID);
+						
+						if(ID == 0){
+						printf("Regresando...\n");
+						Sleep(700);
+						break;
+						}
+
 						if (search(raiz, ID)) {
-							printf("Producto eliminado.\n");
+							printf(ANSI_GREEN"Producto eliminado.\n"ANSI_RESET);
 						} else {
-							printf("Producto no encontrado.\n");
+							printf(ANSI_YELLOW"Producto no encontrado.\n"ANSI_RESET);
 							Sleep(500);
 						}
 						GuardarInventarioEnArchivo(*raiz, "recursos/output/Inventario.csv");
@@ -141,7 +150,7 @@ void menuAdmin(Producto **raiz) {
 						break;
 					case 3:
 						salir = 1;
-						fade_out_slot(3, 600); // Desvanece la música de fondo del administrador
+						fade_out_pause_slot(3, 600); // Pausa la música de fondo del administrador con fade out
 						break;
 				}
 			}

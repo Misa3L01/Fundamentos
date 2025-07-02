@@ -404,9 +404,11 @@ void Copiar(Producto *raiz, Producto *raizDir){
 }
 
 void MostrarLista(Producto *Lista){
+	int a = 1;
 	while(Lista != NULL){
-		printf("Nombre: %s, Categoria: %s, Precio: %.2f\n", Lista->Nombre, Lista->Categoria, Lista->Precio);
+		printf("[%d] Nombre: %s, Categoria: %s, Precio: %.2f\n",a, Lista->Nombre, Lista->Categoria, Lista->Precio);
 		Lista = Lista->right;
+		a++;
 	}
 }
 
@@ -429,10 +431,12 @@ void EliminarNodo(Producto **Lista, float *total){
 	if(mark == *Lista){
 		free(*Lista);
 		*Lista = NULL;
+		printf("Producto eliminado\n");
 		return;
 	}
 	free(mark);
 	pre->right = NULL;
+	printf("Producto eliminado\n");
 	return;
 }
 
@@ -488,31 +492,33 @@ void CargarCarritoALista(Producto ** Lista, char direccion[]){
 	fclose(archivo);
 }
 	
-	void DeleteNode(Producto **Lista, char Name[]){
+	int DeleteNode(Producto **Lista, char Name[], int a){
+		int search = 1;
 		if(!(*Lista)){
 			printf("La lista esta vacia\n");
-			return;
+			return 0;
 		}
 		Producto *mark = *Lista;
 		Producto *pre = NULL;
-		while(mark != NULL && strcmp(mark->Nombre, Name) != 0){
+		while(mark != NULL && search != a){
 			pre = mark;
 			mark = mark->right;
+			search++;
 		}
 		if(mark == NULL){
 			printf("No se ha encontrado el producto\n");
-			return;
+			return 0;
 		}
 		if(mark == *Lista){
 			*Lista = (*Lista)->right;
 			free(mark);
 			printf("Se ha borrado el producto del carrito\n");
-			return;
+			return 1;
 		}
 		pre->right = mark->right;
 		free(mark);
 		printf("Se ha borrado el producto del carrito\n");
-		return;
+		return 1;
 	}
 
 #endif

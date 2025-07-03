@@ -38,7 +38,7 @@ Todo esto se realiza de forma sencilla a través de una interfaz medianamente am
 
 Para poder compilar y ejecutar este proyecto en VS Code, es **necesario** tener instalado MinGW-w64:
 
-1. **Instalación incluida:** En el directorio del proyecto se incluye un archivo `.rar` con la carpeta `mingw64` completa.
+1. https://winlibs.com/#download-release 
 2. **Descompresión:** Extrae la carpeta `mingw64` y colócala en una ubicación fácilmente accesible, preferiblemente en el disco C: o en la raíz de otra unidad.
    - Ejemplo de ubicación recomendada: `C:\mingw64`
 3. **Configuración del PATH:** Para que el sistema detecte y pueda usar GCC correctamente, debes agregar la ruta `C:\mingw64\bin` (o la ruta donde hayas instalado MinGW) a las variables de entorno del sistema PATH.
